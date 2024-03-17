@@ -44,7 +44,7 @@ userSchema.methods.generateToken = function(){
       name:this.name,
       email:this.email
     },
-    proccess.env.JWT_SECRET,
+    process.env.JWT_SECRET,
     {
       expiresIn:process.env.TOKEN_EXPIRY
     }

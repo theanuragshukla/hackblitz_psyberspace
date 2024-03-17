@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const User = require("../../db/schemas/users.js")
-const ApiError = require("../ApiError.js")
+const ApiError = require("../../utils/ApiError.js")
 const ApiResponse = require('../../utils/ApiResponse.js')
 const asyncHandler = require('../../utils/asyncHandler.js')
 
@@ -9,7 +9,7 @@ router.post('/login', asyncHandler(async (req, res)=>{
   if(!email || !password){
     throw new ApiError(400,"Both email and password required")
   }
-  const user = await User.findone({email})
+  const user = await User.findOne({email})
   if(!user){
     throw new ApiError(400,"User not exist")
   }
@@ -18,6 +18,7 @@ router.post('/login', asyncHandler(async (req, res)=>{
     throw new ApiError(401,"Invalid user credentials")
   }
   const token = user.generateToken();
+  console.log(token, "token")
   const loggedInUser = await User.findById(user._id).select("-password");
   const options = {
     httpOnly:true,

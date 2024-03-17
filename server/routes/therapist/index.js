@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const User = require("../../db/schema/user.js")
 const ApiError = require("../../utils/ApiError.js")
 const ApiResponse = require('../../utils/ApiResponse.js')
 

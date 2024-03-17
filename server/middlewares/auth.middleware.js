@@ -4,6 +4,7 @@ const ApiError = require("../utils/ApiError.js")
 const User = require("../db/schemas/users.js")
 const verifyToken = asyncHandler(async(req,_,next)=>{
     const token = req.cookies?.Token;
+    console.log(token, "token")
     try{
     if(!token){
         throw new ApiError(400,"Unauthorized request")

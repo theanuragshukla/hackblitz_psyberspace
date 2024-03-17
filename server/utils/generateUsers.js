@@ -17,4 +17,7 @@ for (let i = 0; i < 100; i++){
         degree : degreeGot,
         experience: 0
     })
+    .then((user) => {
+        console.log(user);
+    })
 }

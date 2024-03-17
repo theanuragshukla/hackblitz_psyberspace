@@ -1,15 +1,19 @@
 require("dotenv").config();
-require("./db/connection");
+require("./db/connection.js");
+const chat = require("./io");
 const express = require("express");
 const app = express();
 const cors = require("cors");
 const http = require("http").Server(app);
 const  therp = require('./routes/therapist')
-const user = require('./routes/user');
-const verifyToken = require("./middlewares/auth.middleware.js");
-
-
+const user = require('./routes/user')
+const verifyToken = require('./middlewares/auth.middleware.js');
+const { ExpressPeerServer } = require("peer");
+const authRouter = require('./routes/auth')
 const port = process.env.PORT || 8000;
+const cookieParser = require('cookie-parser')
+
+app.use(cookieParser())
 
 app.use(
     cors({
@@ -34,17 +38,28 @@ app.get("/", (_, res) => {
   res.json({ status: true, msg: "Alive!" });
 });
 
+
 app.use('/auth', authRouter)
 
-app.use((err, req, res, next) => {
-  console.error(err.message || "error");
-  res.status(500).json({ status: false, msg: err.message });
+app.use(verifyToken)
+
+
+app.use( '/user', user)
+
+app.use('/therapist',therp)
+
+
+const server = http.listen(port, () => {
+  console.log(`Server is running on port ${port}`)
 });
 
-app.use('/user',verifyToken,user)
-
-app.use('/therapist',verifyToken,therp)
-
-http.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "http://localhost:3000",
+  },
 });
+const peerServer = ExpressPeerServer(server, {
+    debug: true,
+});
+app.use("/peer", peerServer);
+chat(io);
