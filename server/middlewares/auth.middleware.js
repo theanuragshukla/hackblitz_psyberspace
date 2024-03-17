@@ -3,8 +3,8 @@ const jwt = require("jsonwebtoken")
 const ApiError = require("../utils/ApiError.js")
 const User = require("../db/schemas/users.js")
 const verifyToken = asyncHandler(async(req,_,next)=>{
-    try{
     const token = req.cookies?.Token;
+    try{
     if(!token){
         throw new ApiError(400,"Unauthorized request")
     }
@@ -17,7 +17,7 @@ const verifyToken = asyncHandler(async(req,_,next)=>{
     req.user = user
     next()
 }
-    catch (error) {
+catch (error) {
         throw new ApiError(401,error?.message||"Invalid access token")
    }
 })

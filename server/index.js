@@ -4,9 +4,9 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const http = require("http").Server(app);
-const authRouter = require('./routes/auth')
 const  therp = require('./routes/therapist')
-const user = require('./routes/user')
+const user = require('./routes/user');
+const verifyToken = require("./middlewares/auth.middleware.js");
 
 
 const port = process.env.PORT || 8000;
@@ -37,14 +37,14 @@ app.get("/", (_, res) => {
 app.use('/auth', authRouter)
 
 app.use((err, req, res, next) => {
-  logger.error(err.message || "error");
+  console.error(err.message || "error");
   res.status(500).json({ status: false, msg: err.message });
 });
 
-app.use('/user', user)
+app.use('/user',verifyToken,user)
 
-app.use('/therapist', therp)
+app.use('/therapist',verifyToken,therp)
 
 http.listen(port, () => {
-  logger.info(`Server is running on port ${port}`);
+  console.log(`Server is running on port ${port}`);
 });
