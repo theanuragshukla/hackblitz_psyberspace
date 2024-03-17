@@ -1,19 +1,20 @@
-export const ACCESS_TOKEN = 'ACCESS_TOKEN'
+export const ACCESS_TOKEN = "ACCESS_TOKEN";
 export const ROUTES = {
-  HOME: '/',
-  DASHBOARD:'/dashboard', 
-  LOGIN:'/login', 
-  SIGNUP: '/signup'
-}
+  HOME: "/",
+  DASHBOARD: "/dashboard",
+  LOGIN: "/login",
+  SIGNUP: "/signup",
+};
 
 export const SIDEBAR_ROUTES = {
-  home: '/dashboard',
-  appointments: '/appointments',
-  community: '/community',
-  ai: '/ai',
-  mindfullness: '/mindfullness',
-  video: '/video'
-}
+  home: "/dashboard",
+  therepists: "/therapists",
+  appointments: "/appointments",
+  community: "/community",
+  ai: "/ai",
+  mindfullness: "/mindfullness",
+  video: "/video",
+};
 
 export const mentalHealthData = [
   {
@@ -66,4 +67,4 @@ export const howCanWeHelpData = [
       "Provide a safe space for you to talk about your mental health",
     ],
   },
-]
+];

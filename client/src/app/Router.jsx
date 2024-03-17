@@ -8,6 +8,7 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import Mindfullness from "./components/Mindfullness";
 import Signup from "./components/Signup";
+import Therapists from "./components/Therapists";
 import VideoChat from "./components/VideoChat";
 import DashLayout from "./layouts/DashLayout";
 import HomeLayout from "./layouts/HomeLayout";
@@ -23,6 +24,7 @@ export default function Router() {
       <Route element={<DashLayout />}>
         <Route path={SIDEBAR_ROUTES.home} element={<Dashboard />} />
         <Route path={SIDEBAR_ROUTES.appointments} element={<Appointments />} />
+        <Route path={SIDEBAR_ROUTES.therepists} element={<Therapists />} />
         <Route path={SIDEBAR_ROUTES.mindfullness} element={<Mindfullness />} />
         <Route path={SIDEBAR_ROUTES.community} element={<Community />} />
         <Route path={SIDEBAR_ROUTES.ai} element={<AiChat/>} />

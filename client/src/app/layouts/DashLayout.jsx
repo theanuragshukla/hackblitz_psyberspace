@@ -17,7 +17,7 @@ import {
 } from "@chakra-ui/react";
 
 import { FiMenu, FiSearch } from "react-icons/fi";
-import { FaBell, FaDumbbell } from "react-icons/fa";
+import { FaBell, FaDumbbell, FaLaptopMedical } from "react-icons/fa";
 import {
   MdChatBubble,
   MdHome,
@@ -29,6 +29,7 @@ import { BsGearFill } from "react-icons/bs";
 import Logo from "../common/Logo";
 import { Outlet, useNavigate } from "react-router-dom";
 import { SIDEBAR_ROUTES } from "../../constants";
+import { GiDoctorFace } from "react-icons/gi";
 
 export default function DashLayout() {
   const sidebar = useDisclosure();
@@ -116,11 +117,19 @@ export default function DashLayout() {
         >
           My Appointments
         </NavItem>
+
         <NavItem
           icon={FaDumbbell}
           onClick={() => navigate(SIDEBAR_ROUTES.mindfullness)}
         >
           Mindfullness Exercises
+        </NavItem>
+
+        <NavItem
+          icon={FaLaptopMedical}
+          onClick={() => navigate(SIDEBAR_ROUTES.therepists)}
+        >
+            Find Therapists
         </NavItem>
         <NavItem icon={MdChatBubble} onClick={integrations.onToggle}>
           Chat Support
