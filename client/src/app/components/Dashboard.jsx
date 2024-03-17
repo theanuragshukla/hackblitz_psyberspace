@@ -6,11 +6,9 @@ import {
     Button,
     ButtonGroup,
     IconButton,
-    BsBoxArrowUpRight,
-    AiFillEdit,
-    BsFillTrashFill,
 } from "@chakra-ui/react";
 import { profile } from "../../data/user";
+import { AiFillEdit } from 'react-icons/ai';
 import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import { useColorModeValue } from "@chakra-ui/react";
 import {
@@ -24,14 +22,15 @@ import {
     VStack,
 } from "@chakra-ui/react";
 import { MdHeadset, MdLocationOn, MdEmail } from "react-icons/md";
-import { BsFillBriefcaseFill } from "react-icons/bs";
+import {  BsBoxArrowUpRight, BsFillTrashFill } from "react-icons/bs";
 
 export default function Dashboard() {
     const [user, setUser] = useState({});
     async function getDashboardData() {
         const { status, msg, data } = await profile();
         if (status) setUser(data[0]);
-        const doctors = await getDoctors();
+      const doctors = await getDoctors();
+      
     }
     const data = [
         {
@@ -234,7 +233,7 @@ export default function Dashboard() {
                         </Box>
                     </Flex>
 
-                    {/* <Flex
+                    <Flex
                         w="full"
                         bg="#edf3f8"
                         _dark={{
@@ -387,7 +386,7 @@ export default function Dashboard() {
                                 })}
                             </Tbody>
                         </Table>
-                    </Flex> */}
+                    </Flex>
                 </div>
             )}
         </>
