@@ -13,6 +13,7 @@ import VideoChat from "./components/VideoChat";
 import DashLayout from "./layouts/DashLayout";
 import HomeLayout from "./layouts/HomeLayout";
 import UpdateForm from "./components/UpdateForm";
+import CreateAppointMent from "./components/CreateAppointMent";
 
 export default function Router() {
   return (
@@ -31,6 +32,7 @@ export default function Router() {
         <Route path={SIDEBAR_ROUTES.ai} element={<AiChat/>} />
         <Route path={SIDEBAR_ROUTES.video} element={<VideoChat/>} />
         <Route path={SIDEBAR_ROUTES.update} element={<UpdateForm/>} />
+        <Route path={SIDEBAR_ROUTES.createappointment} element={<CreateAppointMent/>} />
       </Route>
     </Routes>
   );

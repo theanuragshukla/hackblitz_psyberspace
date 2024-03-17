@@ -15,6 +15,7 @@ export const SIDEBAR_ROUTES = {
   mindfullness: "/mindfullness",
   video: "/video",
   update:"/update",
+  createappointment:"/appointments/:id",
 };
 
 export const mentalHealthData = [
