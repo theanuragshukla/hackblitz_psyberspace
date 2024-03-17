@@ -14,7 +14,6 @@ const userSchema = mongoose.Schema({
     type:String,
     required:[true,"Password is required"]
   },
-  details:{
     phone:{
       type:String,     
     },
@@ -28,17 +27,26 @@ const userSchema = mongoose.Schema({
       type:Number,
       default:0
     }
-  }
 });
 
 userSchema.pre("save",async function(next){
-  if(!this.isModigied("password"))return next()
+  if(!this.isModified("password"))return next()
   this.password = await bcrypt.hash(this.password,10)
 })
 userSchema.methods.isPasswordCorrect = async function(password){
   return await bcrypt.compare(password,this.password)
 }
 userSchema.methods.generateToken = function(){
-  
+  return jwt.sign(
+    {
+      _id:this._id,
+      name:this.name,
+      email:this.email
+    },
+    proccess.env.JWT_SECRET,
+    {
+      expiresIn:process.env.TOKEN_EXPIRY
+    }
+  )
 }
 module.exports = mongoose.model("User", userSchema);
