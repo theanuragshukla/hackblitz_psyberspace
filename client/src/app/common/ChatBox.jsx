@@ -30,21 +30,13 @@ const ChatBox = ({ socket, video = false, data }) => {
 
     socket.on("paired", () => {
       console.log(`Paired`);
-      setMessages([{ sender: "System", msg: "Stranger connected" }]);
-    });
-
-    socket.on("partner-skipped", () => {
-      console.log("Partner Skipped");
-      addMessage("System", "Stranger Skipped you");
+      setMessages([{ sender: "System", msg: "User connected" }]);
     });
 
     socket.on("newMsg", ({ sender, msg }) => {
       addMessage("Stranger", msg);
     });
 
-    socket.on("enqueue", () => {
-      addMessage("system", "waiting for partner to join");
-    });
     socket.on("end-conn", (vid) => {
       if (video) {
         data.endConn(vid);
@@ -57,6 +49,8 @@ const ChatBox = ({ socket, video = false, data }) => {
   }, [socket]);
 
   const handleSend = (e) => {
+    console.log(socket)
+    if(!socket) return;
     if (e.key !== "Enter") return;
     addMessage("You", inputValue);
     socket.emit("msg", inputValue);

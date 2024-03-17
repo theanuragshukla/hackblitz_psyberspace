@@ -1,3 +1,8 @@
+const data = {
+    user: null,
+    doctor: null,
+};
+
 module.exports = (io) => {
     io.on("connection", (socket) => {
         const uid = socket.handshake.query.uid;
@@ -7,40 +12,29 @@ module.exports = (io) => {
         socket.partner = null;
         console.log("socket connected: ", socket.uid, socket.vid);
 
-        socket.on("pair", (id, d_id) => {
+        socket.on("pair", (id, isDoctor) => {
             socket.vidid = id;
-            if (socket.data.connected && socket.partner) {
-                const partner = socket.partner;
-                console.log("socket vidid", id);
-                console.log("partner vidid", partner.vidid);
-                partner.emit("end-conn", socket.vidid);
-                partner.emit("partner-skipped");
-                socket.emit("end-conn", partner.vidid);
-                partner.data.connected = false;
-                partner.partner = null;
-                socket.partner = null;
-            }
-            partner = socket.vid ? unpaired_vid.poll() : unpaired.poll();
-            if (!partner || partner.uid === socket.uid) {
-                socket.timestamp = Date.now();
-                socket.vid ? unpaired_vid.add(socket) : unpaired.add(socket);
-                socket.emit("enqueue");
-                return;
-            }
-            socket.vid ? unpaired_vid.remove(socket) : unpaired.remove(socket);
-            socket.data.connected = true;
-            partner.data.connected = true;
-            socket.partner = partner;
-            partner.partner = socket;
-            socket.emit("paired");
-            partner.emit("paired");
-            if (socket.vid) {
-                partner.emit("vid_paired", id);
+            if (isDoctor) {
+                data.doctor = socket;
+                if (data.user) {
+                    data.user.emit("paired", id);
+                    socket.emit("paired", data.user.vidid);
+                    socket.data.connected = true;
+                    data.user.data.connected = true;
+                }
+            } else {
+                data.user = socket;
+                if (data.doctor) {
+                    data.doctor.emit("paired", id);
+                    socket.emit("paired", data.doctor.vidid);
+                    socket.data.connected = true;
+                    data.user.data.connected = true;
+                }
             }
         });
 
         socket.on("msg", (msg) => {
-            if (!socket.data.connected || !socket.partner) {
+            if (!socket.data.connected) {
                 socket.emit("newMsg", {
                     sender: "Server",
                     msg: "You are not connected to Anyone",
@@ -52,14 +46,16 @@ module.exports = (io) => {
         });
         socket.on("disconnect", () => {
             console.log("socket disconnected:", socket.uid);
-            if (!socket.data.connected) {
-
+            if (socket.vid) {
+                if (socket === data.doctor) {
+                    data.doctor = null;
+                } else {
+                    data.user = null;
+                }
             } else {
-                if (!socket.partner) return;
-                socket.partner.emit("partner-skipped");
-                socket.emit("end-conn", socket.partner.vidid);
-                socket.partner.emit("end-conn", socket.vidid);
-                socket.partner.data.connected = false;
+                if (socket.partner) {
+                    socket.partner.partner = null;
+                }
             }
         });
         socket.on("join-room", (roomId, userId) => {

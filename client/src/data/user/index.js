@@ -36,5 +36,5 @@ export const getProfile = (id) => {
 };
 
 export const updateProfile = (values) => {
-  return reqModal(() => getClient().put("/user", values));
+  return reqModal(() => getClient().post("/user/update", values));
 };

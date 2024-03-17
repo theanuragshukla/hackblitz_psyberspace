@@ -13,7 +13,6 @@ const Chat = () => {
     const onloadVideo = async () => {
       const prof = await profile();
       const uid = prof.data[0].uid;
-
       setSocket(io.connect(`${SERVER}/`, { query: `uid=${uid}&video=false` }));
     };
     onloadVideo();
