@@ -11,7 +11,8 @@ for (let i = 0; i < 100; i++){
     User.create({
         name: randomStringGenearator(10),
         email: randomStringGenearator(10) + "@gmail.com",
-        password: randomStringGenearator(10),
+        uid: randomStringGenearator(10) + "@gmail.com",
+        password: 'asdf1234',
         phone: randomStringGenearator(10),
         role: roleValue,
         degree : degreeGot,
