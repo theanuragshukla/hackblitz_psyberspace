@@ -11,6 +11,7 @@ import {
     HStack,
     VStack,
 } from "@chakra-ui/react";
+import { SIDEBAR_ROUTES } from "../../constants";
 const specialities = [
     "Depression",
     "Anxiety",
@@ -141,7 +142,7 @@ export default function Appointments() {
 
                                     <Flex justifyContent="end" mt={4}>
                                         <Link
-                                            href={`/therapists/${doctor.uid}`}
+                                            onClick={()=>{navigate(SIDEBAR_ROUTES.video)}}
                                             fontSize="xl"
                                             color="brand.500"
                                             _dark={{
