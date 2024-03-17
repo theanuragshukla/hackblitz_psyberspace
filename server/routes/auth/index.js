@@ -53,16 +53,20 @@ router.post('/signup', asyncHandler(async(req, res)=>{
     email,
     password
   })
-
+  
   const createdUser = await User.findById(user._id).select("-password")
   if(!createdUser){
     throw new ApiError(500,"Something went wrong while registering user")
   }
-  
+  const token = createdUser.generateToken();
+  const options = {
+    httpOnly:true,
+    secure:true,
+  };
   return res
   .status(200)
+  .cookie("Token",token,options)
   .json(new ApiResponse(true,"User create successfully",createdUser))
-
 })
 )
 
