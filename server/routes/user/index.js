@@ -19,6 +19,16 @@ const ApiError = require("../../utils/ApiError.js");
 //         return res.json(new ApiError(200, err.message));
 //     }
 // });
+//
+//
+router.get("/", async (req, res) => {
+    const uid = req.user.uid
+    const user = await User.find({uid}).select("-password");
+    if (!user) {
+        throw new ApiError(404, "User not found");
+    }
+    return res.json(new ApiResponse(true, "User fetched successfully", user));
+});
 
 router.get("/:id", async (req, res) => {
     const userId = req.params._id;

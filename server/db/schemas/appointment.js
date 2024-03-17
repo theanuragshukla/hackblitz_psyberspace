@@ -9,7 +9,7 @@ const appointmentSchema = mongoose.Schema({
         required : [true, 'Date is required']
     } ,
     time: {
-        type: string,
+        type: String,
         required : [true, 'Time is required']
     },
     patient: {

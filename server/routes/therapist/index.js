@@ -17,7 +17,7 @@ router.get("/", async (req, res, next) => {
 });
 
 // crate appointment
-router.post("appointment", async (req, res, next) => {
+router.post("/appointment", async (req, res, next) => {
     try {
         const appointment = await Appointment.create(req.body);
         res.json({
@@ -31,7 +31,7 @@ router.post("appointment", async (req, res, next) => {
 });
 
 // read appointment
-router.get("appointment/:id", async (req, res, next) => {
+router.get("/appointment/:id", async (req, res, next) => {
     try {
         const appointments = await Appointment.find({
             _id: req.params.id,
@@ -49,7 +49,7 @@ router.get("appointment/:id", async (req, res, next) => {
 });
 
 // appointment list doctors
-app.get("/appointment/doctors/:id", async (req, res, next) => {
+router.get("/appointment/doctors/:id", async (req, res, next) => {
     const doctorId = req.params.id;
     try {
         const appointments = await Appointment.find({doctor : doctorId}).lean();
@@ -66,7 +66,7 @@ app.get("/appointment/doctors/:id", async (req, res, next) => {
 })
 
 // apointments of users
-app.get("/appointment/patients/:id", async (req, res, next) => {
+router.get("/appointment/patients/:id", async (req, res, next) => {
     const patientId = req.params.id;
     try {
         const appointments = await Appointment.find({patient : patientId}).lean();
