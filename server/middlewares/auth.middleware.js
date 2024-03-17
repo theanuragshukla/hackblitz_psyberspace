@@ -3,8 +3,8 @@ const jwt = require("jsonwebtoken")
 const ApiError = require("../utils/ApiError.js")
 const User = require("../db/schemas/users.js")
 const verifyToken = asyncHandler(async(req,_,next)=>{
-    const token = req.cookies?.Token;
-    console.log(token, "token")
+    const token = req.cookies.Token;
+    console.log(token, req.cookies)
     try{
     if(!token){
         throw new ApiError(400,"Unauthorized request")
