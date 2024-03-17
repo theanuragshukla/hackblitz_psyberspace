@@ -1,5 +1,6 @@
-import mongoose from "mongoose";
-
+const mongoose  = require("mongoose");
+const jwt  = require("jsonwebtoken")
+const bcrypt = require("bcryptjs");
 const userSchema = mongoose.Schema({
   name: {
     type:String,
@@ -30,4 +31,14 @@ const userSchema = mongoose.Schema({
   }
 });
 
-modulr.exports = mongoose.model("User", userSchema);
+userSchema.pre("save",async function(next){
+  if(!this.isModigied("password"))return next()
+  this.password = await bcrypt.hash(this.password,10)
+})
+userSchema.methods.isPasswordCorrect = async function(password){
+  return await bcrypt.compare(password,this.password)
+}
+userSchema.methods.generateToken = function(){
+  
+}
+module.exports = mongoose.model("User", userSchema);

@@ -2,7 +2,16 @@ const router = require("express").Router();
 const User = require(".../db/schema/user.js")
 const ApiError = require(".../utils/ApiError.js")
 const ApiResponse = require('.../utils/ApiResponse.js')
+const asyncHandler = require('.../utils/asyncHandler.js')
 
+const generateToken = async (userId)=>{
+  try{
+    const user = await User.findById(userId)
+    // const 
+  }catch{
+    
+  }
+}
 router.post('/login', async (req, res)=>{
   const {email, password} = req.body
   const data = await auth.login({
@@ -13,7 +22,7 @@ router.post('/login', async (req, res)=>{
 })
 
 
-router.post('/signup', async(req, res)=>{
+router.post('/signup', asyncHandler(async(req, res)=>{
   const {firstName, lastName="", email, password} = req.body
   if(
     [firstName,email,password].some((field)=>field?.trim()==="")
@@ -41,10 +50,8 @@ router.post('/signup', async(req, res)=>{
   .json(new ApiResponse(true,"User create successfully",createdUser))
 
 })
+)
 
-router.post('/details',async(req,res)=>{
-
-})
 
 
 module.exports = router
