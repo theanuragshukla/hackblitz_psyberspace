@@ -1,6 +1,7 @@
-const mongoose  = require("mongoose");
-const jwt  = require("jsonwebtoken")
+const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+// ture for therapist and false for user
 const userSchema = mongoose.Schema({
   name: {
     type:String,
@@ -17,11 +18,11 @@ const userSchema = mongoose.Schema({
     phone:{
       type:String,     
     },
-    role:{
-      type:Boolean,
+    role: {
+        type: Boolean,
     },
-    degree:{
-      type:String,
+    degree: {
+        type: String,
     },
     experience:{
       type:Number,
