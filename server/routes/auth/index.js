@@ -51,7 +51,7 @@ router.post(
     if ([firstName, email, password].some((field) => field?.trim() === "")) {
       throw new ApiError(400, "All fields are required");
     }
-    const name = firstName + lastName;
+    const name = firstName + " "+ lastName;
     const existedUser = await User.findOne({ email });
     if (existedUser) {
       throw new ApiError(409, "This user already exists");

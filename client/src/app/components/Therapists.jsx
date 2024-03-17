@@ -70,7 +70,8 @@ export default function Therapists() {
                                 p={50}
                                 w="full"
                                 alignItems="center"
-                                justifyContent="center">
+                                justifyContent="center"
+                            >
                                 <Box
                                     w="md"
                                     mx="auto"
@@ -81,13 +82,15 @@ export default function Therapists() {
                                         bg: "gray.800",
                                     }}
                                     shadow="lg"
-                                    rounded="lg">
+                                    rounded="lg"
+                                >
                                     <Flex
                                         justifyContent={{
                                             base: "center",
                                             md: "end",
                                         }}
-                                        mt={-16}>
+                                        mt={-16}
+                                    >
                                         <Image
                                             w={20}
                                             h={20}
@@ -117,7 +120,8 @@ export default function Therapists() {
                                             base: 2,
                                             md: 0,
                                         }}
-                                        fontWeight="bold">
+                                        fontWeight="bold"
+                                    >
                                         {doctor.name}
                                     </chakra.h2>
 
@@ -126,7 +130,8 @@ export default function Therapists() {
                                         color="gray.600"
                                         _dark={{
                                             color: "gray.200",
-                                        }}>
+                                        }}
+                                    >
                                         {specialities
                                             .sort(() => 0.5 - Math.random())
                                             .slice(0, 3)
@@ -142,12 +147,16 @@ export default function Therapists() {
                                     <Flex justifyContent="end" mt={4}>
                                         <Link
                                             href={`/therapists/${doctor.uid}`}
-                                            fontSize="xl"
+                                            fontSize="sm"
+                            bg="orange"
+                            borderRadius="full"
+                            p={1}
                                             color="brand.500"
                                             _dark={{
                                                 color: "brand.300",
-                                            }}>
-                                            John Doe
+                                            }}
+                                        >
+                                            Book Appointment
                                         </Link>
                                     </Flex>
                                 </Box>

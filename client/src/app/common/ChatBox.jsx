@@ -34,9 +34,12 @@ const ChatBox = ({ socket, video = false, data }) => {
     });
 
     socket.on("newMsg", ({ sender, msg }) => {
-      addMessage("Stranger", msg);
+      addMessage("User", msg);
     });
 
+    socket.on("ai-msg", (msg) => {
+      addMessage("AI friend", msg);
+    });
     socket.on("end-conn", (vid) => {
       if (video) {
         data.endConn(vid);
@@ -53,7 +56,7 @@ const ChatBox = ({ socket, video = false, data }) => {
     if(!socket) return;
     if (e.key !== "Enter") return;
     addMessage("You", inputValue);
-    socket.emit("msg", inputValue);
+    socket.emit(!!data && data.ai ? "ai-chat" :  "msg", inputValue);
     setInputValue("");
   };
 

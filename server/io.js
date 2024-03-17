@@ -3,6 +3,9 @@ const data = {
     doctor: null,
 };
 
+const Gemini = require('./utils/genaicode')
+const ai = new Gemini()
+
 module.exports = (io) => {
     io.on("connection", (socket) => {
         const uid = socket.handshake.query.uid;
@@ -12,9 +15,10 @@ module.exports = (io) => {
         socket.partner = null;
         console.log("socket connected: ", socket.uid, socket.vid);
 
-        socket.on("pair", (id, isDoctor) => {
+        socket.on("pair", (id) => {
+            console.log("pairing with: ", id);
             socket.vidid = id;
-            if (isDoctor) {
+            if (!data.doctor) {
                 data.doctor = socket;
                 if (data.user) {
                     data.user.emit("paired", id);
@@ -61,6 +65,11 @@ module.exports = (io) => {
         socket.on("join-room", (roomId, userId) => {
             socket.join(roomId);
             socket.to(roomId).emit("user-connected", userId);
+        });
+        socket.on("ai-chat", async(msg) => {
+            const res = await ai.chat(msg)
+            console.log(res, "res");
+            socket.emit("ai-msg", !!res ? res : "I am not able to understand")
         });
     });
 };

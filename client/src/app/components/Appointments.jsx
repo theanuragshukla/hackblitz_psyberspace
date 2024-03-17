@@ -12,6 +12,7 @@ import {
     VStack,
 } from "@chakra-ui/react";
 import { SIDEBAR_ROUTES } from "../../constants";
+import { useNavigate } from "react-router-dom";
 const specialities = [
     "Depression",
     "Anxiety",
@@ -45,6 +46,7 @@ const specialities = [
     "Life transitions",
 ];
 export default function Appointments() {
+    const navigate = useNavigate();
     const [doctors, setDoctors] = useState([]);
     async function getDashboardData() {
         const response = await profile();

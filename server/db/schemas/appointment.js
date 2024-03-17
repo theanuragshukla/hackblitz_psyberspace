@@ -2,22 +2,19 @@
 const mongoose = require('mongoose');
 
 const appointmentSchema = mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
     date: {
         type: Date,
         default: Date.now,
-        required : [true, 'Date is required']
     } ,
     time: {
         type: String,
-        required : [true, 'Time is required']
     },
     patient: {
-        type: mongoose.Schema.Types.ObjectId,
+        type:String,
         ref: 'User',
     },
     doctor: {
-        type: mongoose.Schema.Types.ObjectId,
+        type:String,
         ref: 'User',
     } ,
     reason: String, 

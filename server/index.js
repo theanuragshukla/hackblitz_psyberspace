@@ -15,6 +15,21 @@ const cookieParser = require('cookie-parser')
 
 app.use(cookieParser())
 
+const server = http.listen(port, () => {
+  console.log(`Server is running on port ${port}`)
+});
+
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "http://localhost:3000",
+  },
+});
+const peerServer = ExpressPeerServer(server, {
+    debug: true,
+});
+
+app.use('/peer', peerServer)
+
 app.use(
     cors({
         credentials: true,
@@ -49,17 +64,4 @@ app.use( '/user', user)
 app.use('/therapist',therp)
 
 
-const server = http.listen(port, () => {
-  console.log(`Server is running on port ${port}`)
-});
-
-const io = require("socket.io")(server, {
-  cors: {
-    origin: "http://localhost:3000",
-  },
-});
-const peerServer = ExpressPeerServer(server, {
-    debug: true,
-});
-app.use("/peer", peerServer);
 chat(io);

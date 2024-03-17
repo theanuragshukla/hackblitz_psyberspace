@@ -50,7 +50,7 @@ const OmegleVideoChatPage = () => {
   async function peerConnection() {
     return new Peer({
       path: `/peer`,
-      secure: true,
+      secure: false,
       host: PEER_SERVER,
       port: PEER_PORT,
       config: {
@@ -92,7 +92,7 @@ const OmegleVideoChatPage = () => {
 
   useEffect(() => {
     if (!socket) return;
-    socket.on("vid_paired", (userId) => {
+    socket.on("paired", (userId) => {
       connectToNewUser(userId);
     });
   }, [socket]);
@@ -107,7 +107,10 @@ const OmegleVideoChatPage = () => {
       setPeers((prev) => ({ ...prev, [call.peer]: call }));
     });
 
-    peer.on("open", (id) => socket.emit("pair", id));
+    peer.on("open", (id) => {
+      socket.emit("pair", id);
+      console.log(id, "open");
+    });
   }, [peer]);
 
   useEffect(() => {
