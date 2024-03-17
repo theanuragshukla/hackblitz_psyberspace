@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const User = require(".../db/schema/user.js")
-const ApiError = require(".../utils/ApiError.js")
-const ApiResponse = require('.../utils/ApiResponse.js')
-const asyncHandler = require('.../utils/asyncHandler.js')
+const User = require("../../db/schemas/users.js")
+const ApiError = require("../../utils/ApiError.js")
+const ApiResponse = require('../../utils/ApiResponse.js')
+const asyncHandler = require('../../utils/asyncHandler.js')
 
 const generateToken = async (userId)=>{
   try{
