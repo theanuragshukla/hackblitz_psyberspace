@@ -46,7 +46,7 @@ export default function Home() {
           <Button
             rounded={"full"}
             px={6}
-            onClick={() => navigate(ROUTES.LOGIN)}
+            onClick={() => navigate(ROUTES.SIGNUP)}
             colorScheme={"orange"}
             bg={"orange.400"}
             _hover={{ bg: "orange.500" }}
