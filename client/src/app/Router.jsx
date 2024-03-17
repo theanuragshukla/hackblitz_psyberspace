@@ -12,6 +12,7 @@ import Therapists from "./components/Therapists";
 import VideoChat from "./components/VideoChat";
 import DashLayout from "./layouts/DashLayout";
 import HomeLayout from "./layouts/HomeLayout";
+import UpdateForm from "./components/UpdateForm";
 
 export default function Router() {
   return (
@@ -29,6 +30,7 @@ export default function Router() {
         <Route path={SIDEBAR_ROUTES.community} element={<Community />} />
         <Route path={SIDEBAR_ROUTES.ai} element={<AiChat/>} />
         <Route path={SIDEBAR_ROUTES.video} element={<VideoChat/>} />
+        <Route path={SIDEBAR_ROUTES.update} element={<UpdateForm/>} />
       </Route>
     </Routes>
   );

@@ -151,7 +151,7 @@ export default function DashLayout() {
             Ai Chat
           </NavItem>
         </Collapse>
-        <NavItem icon={BsGearFill}>Settings</NavItem>
+        <NavItem icon={BsGearFill} onClick={()=>navigate(SIDEBAR_ROUTES.update)}>Settings</NavItem>
       </Flex>
     </Box>
   );

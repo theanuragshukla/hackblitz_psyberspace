@@ -14,6 +14,7 @@ export const SIDEBAR_ROUTES = {
   ai: "/ai",
   mindfullness: "/mindfullness",
   video: "/video",
+  update:"/update",
 };
 
 export const mentalHealthData = [
