@@ -52,7 +52,7 @@ This hackathon only had 5 themes:
 - The UI is not that impressive and some of the features are not complete yet, but this project represents a great prototype for such an idea.
 - we enjoyed our time while building it
 
-## Lessons learnrd
+## Lessons learned
 - Figure out and setup deployment before going into development process. Steps such as adding Dockerfile, docker-compose.yml, nginx.conf, and related ufw setups.
 - Assign right task to right person
 - Branch out before making changes (_looking at you mr. x_) :D
