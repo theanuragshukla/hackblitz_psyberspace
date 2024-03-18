@@ -3,8 +3,8 @@ const data = {
     doctor: null,
 };
 
-const Gemini = require('./utils/genaicode')
-const ai = new Gemini()
+const Gemini = require("./utils/genaicode");
+const ai = new Gemini();
 
 module.exports = (io) => {
     io.on("connection", (socket) => {
@@ -32,20 +32,25 @@ module.exports = (io) => {
                     data.doctor.emit("paired", id);
                     socket.emit("paired", data.doctor.vidid);
                     socket.data.connected = true;
-                    data.user.data.connected = true;
+                    data.doctor.data.connected = true;
                 }
             }
         });
 
         socket.on("msg", (msg) => {
             if (!socket.data.connected) {
-                socket.emit("newMsg", {
-                    sender: "Server",
-                    msg: "You are not connected to Anyone",
-                });
+                socket.emit(
+                    "newMsg",
+                    "Server",
+                    "You are not connected to Anyone"
+                );
                 return;
             } else {
-                socket.partner.emit("newMsg", { sender: "Server", msg });
+                if (socket.id === data.doctor.id) {
+                    data.user.emit("newMsg", "Doctor", msg);
+                } else {
+                    data.doctor.emit("newMsg", "Patient", msg);
+                }
             }
         });
         socket.on("disconnect", () => {
@@ -66,10 +71,10 @@ module.exports = (io) => {
             socket.join(roomId);
             socket.to(roomId).emit("user-connected", userId);
         });
-        socket.on("ai-chat", async(msg) => {
-            const res = await ai.chat(msg)
+        socket.on("ai-chat", async (msg) => {
+            const res = await ai.chat(msg);
             console.log(res, "res");
-            socket.emit("ai-msg", !!res ? res : "I am not able to understand")
+            socket.emit("ai-msg", !!res ? res : "I am not able to understand");
         });
     });
 };

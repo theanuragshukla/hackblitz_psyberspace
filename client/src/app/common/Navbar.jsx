@@ -20,7 +20,7 @@ import { ROUTES } from "../../constants";
 export default function Navbar() {
   const bg = useColorModeValue("background", "background");
   const mobileNav = useDisclosure();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <React.Fragment>
       <chakra.header
@@ -33,8 +33,13 @@ export default function Navbar() {
         py={4}
         shadow="md"
       >
-        <Flex px={{md:32}} alignItems="center" justifyContent="space-between" mx="auto">
-         <Logo/> 
+        <Flex
+          px={{ md: 32 }}
+          alignItems="center"
+          justifyContent="space-between"
+          mx="auto"
+        >
+          <Logo />
           <HStack display="flex" alignItems="center" spacing={1}>
             <HStack
               spacing={1}
@@ -45,16 +50,16 @@ export default function Navbar() {
                 md: "inline-flex",
               }}
             >
-          <Button
-            rounded={"full"}
-            px={6}
-            onClick={() => navigate(ROUTES.LOGIN)}
-            colorScheme={"orange"}
-            bg={"orange.400"}
-            _hover={{ bg: "orange.500" }}
-          >
-    Login
-          </Button>
+              <Button
+                rounded={"full"}
+                px={6}
+                onClick={() => navigate(ROUTES.LOGIN)}
+                colorScheme={"orange"}
+                bg={"orange.400"}
+                _hover={{ bg: "orange.500" }}
+              >
+                Login
+              </Button>
             </HStack>
             <Box
               display={{
@@ -100,18 +105,22 @@ export default function Navbar() {
                   />
                 </Flex>
                 <Button w="full" variant="ghost">
-                  Features
+                  Appointments
                 </Button>
                 <Button w="full" variant="ghost">
-                  Pricing
+                  Find Therapists
                 </Button>
                 <Button w="full" variant="ghost">
-                  Blog
+                  Chat
                 </Button>
                 <Button w="full" variant="ghost">
-                  Company
+                  Mindfulness
                 </Button>
-                <Button onClick={()=>navigate(ROUTES.LOGIN)} w="full" variant="ghost">
+                <Button
+                  onClick={() => navigate(ROUTES.LOGIN)}
+                  w="full"
+                  variant="ghost"
+                >
                   Sign in
                 </Button>
               </VStack>
