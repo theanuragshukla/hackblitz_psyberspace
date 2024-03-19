@@ -38,7 +38,7 @@ psyberSpace is our attempt at reducing the distance between the doctors(therapis
 ### Database
 - MongoDB
 
-## Result (_awaited_)
+## Result: (_Winner_)
 
 ## Experience
 This hackathon only had 5 themes: 
